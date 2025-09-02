@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_gym_trainer,gym.trainer,model_gym_trainer,base.group_user,1,1,1,1
+access_gym_trainee,gym.trainee,model_gym_trainee,base.group_user,1,1,1,1
+access_gym_appointment,gym.appointment,model_gym_appointment,base.group_user,1,1,1,1
+access_gym_subscription,gym.subscription,model_gym_subscription,base.group_user,1,1,1,1
+access_trainer_report_wizard,trainer.report.wizard,model_trainer_report_wizard,base.group_user,1,1,1,1

@@ -1,0 +1,20 @@
+{
+    "name": "Gym Project",
+    "version": "1.0",
+    "sequence": 1,
+    "summary": "Gym Appointments & Subscriptions",
+    "author": "sara dawood",
+    "depends": ["base", "product"],
+    "data": [
+        "security/ir.model.access.csv",
+        "views/gym_appointment_view.xml",
+        "views/gym_subscription_view.xml",
+        "views/gym_trainer_view.xml",
+        "views/gym_trainee_view.xml",
+        "views/menu.xml",
+        "views/wizard_views.xml",
+    ],
+    "application": True,
+    "installable": True,
+    "license": "LGPL-3",
+}

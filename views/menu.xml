@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+      
+   
+    <menuitem id="menu_gym_root" name="Gym Management"/>
+
+    <menuitem id="menu_gym_appointment"
+              name="Appointments"
+              parent="menu_gym_root"
+              action="action_gym_appointment"/>
+
+    <menuitem id="menu_gym_subscription"
+              name="Subscriptions"
+              parent="menu_gym_root"
+              action="action_gym_subscription"/>
+
+    <menuitem id="menu_gym_trainer" 
+              name="Trainers"
+              parent="menu_gym_root"
+              action="action_gym_trainer"/>
+    <menuitem id="menu_gym_trainee" 
+              name="Trainees"
+              parent="menu_gym_root"
+              action="action_gym_trainee"/>
+</odoo>
