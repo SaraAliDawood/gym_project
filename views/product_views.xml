@@ -1,0 +1,28 @@
+<odoo>
+    <record id="view_product_form_inherit_gym" model="ir.ui.view">
+        <field name="name">product.template.form.gym</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="Gym Settings">
+                    <group>
+                        <group string="Trainer Costs">
+                            <field name="trainer_cost_inside"/>
+                            <field name="trainer_cost_outside"/>
+                        </group>
+                        <group string="Trainer Percentage">
+                            <field name="trainer_percentage_inside"/>
+                            <field name="trainer_percentage_outside"/>
+                        </group>
+                        <group string="Options">
+                            <field name="is_subscription"/>
+                            <field name="can_be_freezed"/>
+                            <field name="is_locker"/>
+                        </group>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>

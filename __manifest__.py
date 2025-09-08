@@ -11,6 +11,7 @@
         "views/gym_subscription_view.xml",
         "views/gym_trainer_view.xml",
         "views/gym_trainee_view.xml",
+        "views/product_views.xml",
         "views/menu.xml",
         "views/wizard_views.xml",
     ],

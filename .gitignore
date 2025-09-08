@@ -1,6 +1,3 @@
-# Ignore Docker volumes
-odoo-web-data/
-odoo-db-data/
 
 # Ignore Python cache
 __pycache__/
@@ -13,3 +10,9 @@ __pycache__/
 
 # Ignore environment files
 .env
+
+# Byte-compiled / optimized / DLL files
+*.egg
+*.egg-info/
+dist/
+build/

@@ -27,12 +27,23 @@
                             type="object"
                             class="btn-primary"/>
                 </header>
+                   <div name="button_box" position="inside">
+                        <button class="oe_stat_button" type="object"
+                                name="action_appointment_numbers" icon="fa-star">
+                            <field string="Appointments" name="number_of_appointments"
+                                   widget="statinfo"/>
+                        </button>
+                    </div>
                     <group>
                         <group>
                             <field name="name"/>
                             <field name="phone"/>
                             <field name="national_id"/>
                             <field name="is_active"/>
+                            <field name="number_of_appointments"/>
+                            <field name="trainer_cost_inside"/>
+                            <field name="trainer_cost_outside"/>
+                            <field name="session_cost"/>
                         </group>
                         <group>
                             <field name="image_500" widget="image" class="oe_avatar"/>

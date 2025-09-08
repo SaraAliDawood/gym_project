@@ -79,7 +79,7 @@ class GymSubscription(models.Model):
         "product.product", 
         string="Service", 
         required=True,
-        domain=[("detailed_type", "=", "service")]
+        domain=[("detailed_type", "=", "service"),("is_subscription", "=", True)]
     )
     price = fields.Float(
         string="Price", 

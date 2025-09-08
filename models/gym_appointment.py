@@ -22,10 +22,21 @@ class GymAppointment(models.Model):
     # Trainer info
     trainer_id = fields.Many2one(
         "gym.trainer", 
-        string="Trainer", 
-      
+        string="Trainer",   
     )
    
+    trainer_cost_inside = fields.Float(
+       string="Trainer Cost Out Working Hours",
+       related="trainer_id.trainer_cost_inside"
+    )
+    trainer_cost_outside = fields.Float(
+       string="Trainer Cost Within Working Hours",
+       related="trainer_id.trainer_cost_outside"
+    )
+    session_cost = fields.Float(
+       string="Session Cost",
+       related="trainer_id.session_cost"
+    )
     subscription_id = fields.Many2one(
     "gym.subscription",
     string="Subscription"

@@ -13,11 +13,23 @@ class GymProjectTrainer(models.Model):
     image_500 = fields.Image("Photo", max_width=500, max_height=500)
 
     is_active = fields.Boolean("Is Active?", default=True)
-   
+    session_cost = fields.Float(
+       string="Session Cost"
+    )
+    trainer_cost_inside = fields.Float(
+       string="Trainer Cost Out Working Hours"
+    )
+    trainer_cost_outside = fields.Float(
+       string="Trainer Cost Within Working Hours"
+    )
     appointment_ids = fields.One2many(
         "gym.appointment",
         "trainer_id",
         string="Appointments"
+    )
+    number_of_appointments = fields.Integer(
+        "Number of Appointments",
+        compute="_compute_number_of_appointments",
     )
     status = fields.Selection(
         [
@@ -57,3 +69,22 @@ class GymProjectTrainer(models.Model):
                 'default_trainer_id': self.id,
             }
         }
+    @api.depends("appointment_ids")
+    def _compute_number_of_appointments(self):
+     for trainer in self:
+        if trainer.appointment_ids:
+            trainer.number_of_appointments = self.env['gym.appointment'].search_count([
+                ('trainer_id', '=', trainer.id)
+            ])
+        else:
+            trainer.number_of_appointments = 0
+    
+    def action_appointment_numbers(self):
+        return {
+            'name': "Appointments",
+            'type': 'ir.actions.act_window',
+            'res_model': 'gym.appointment',
+            'view_mode': 'tree,form',
+            'target': 'current',
+            'domain': [('trainer_id', '=', self.id)]
+        }     
