@@ -27,7 +27,7 @@
                             <field name="phone"/>
                             <field name="national_id"/>
                             <field name="subscription_count" readonly="1"/>
-                            <field name="vip" widget="boolean_toggle" readonly="1" attrs="{'invisible': [('vip', '=', False)]}"/>
+                            <field name="vip" widget="boolean_toggle" readonly="1" />
 
                         </group>
                         <group>
