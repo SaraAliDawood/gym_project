@@ -53,6 +53,7 @@ class GymSubscription(models.Model):
         store=True,
         readonly=True
     )
+    
     # -------------------------
     # Trainer appointments
     # -------------------------
