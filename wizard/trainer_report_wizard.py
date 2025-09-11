@@ -35,4 +35,4 @@ class TrainerReportWizard(models.TransientModel):
             "from_date": self.from_date,
             "to_date": self.to_date,
         }
-        return self.env.ref("gym_project.trainer_appointments_count_report_template").report_action(self, data=data)
+        return self.env.ref("gym_project.trainer_appointments_count_report").report_action(self, data=data)
