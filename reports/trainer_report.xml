@@ -1,0 +1,33 @@
+<odoo>
+    <!-- Report Action -->
+    <report
+        id="trainer_appointments_count_report_template"
+        model="trainer.report.wizard"
+        string="Trainer Appointments Count"
+        report_type="qweb-pdf"
+        name="gym_project.trainer_appointments_count_report_template"
+        file="gym_project.trainer_appointments_count_report_template"
+        print_report_name="'Trainer_Appointments_Count'"/>
+
+    <!-- QWeb Template -->
+    <template id="trainer_appointments_count_report_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="wizard">
+                <div class="page">
+                    <h2>Trainer Appointments Report</h2>
+                    <p><strong>Trainer:</strong> <t t-esc="wizard.trainer_id.name"/></p>
+                    <p><strong>From:</strong> <t t-esc="wizard.from_date"/></p>
+                    <p><strong>To:</strong> <t t-esc="wizard.to_date"/></p>
+                    <hr/>
+                    <t t-set="appointments"
+                       t-value="env['gym.appointment'].search([
+                           ('trainer_id', '=', wizard.trainer_id.id),
+                           ('start_time', '&gt;=', wizard.from_date),
+                           ('end_time', '&lt;=', wizard.to_date)
+                       ])"/>
+                    <p><strong>Total Appointments:</strong> <t t-esc="len(appointments)"/></p>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -22,10 +22,17 @@ class TrainerReportWizard(models.TransientModel):
     to_date = fields.Datetime("To Date", required=True)
 
 
-    def action_print(self):
+    # def action_print(self):
 
-        from_date = self.from_date.start_time
-        to_date = self.to_date.end_time
+    #     from_date = self.from_date.start_time
+    #     to_date = self.to_date.end_time
 
     
-        return {'type': 'ir.actions.act_window_close'}
+    #     return {'type': 'ir.actions.act_window_close'}
+    def action_print(self):
+        data = {
+            "trainer_id": self.trainer_id.id,
+            "from_date": self.from_date,
+            "to_date": self.to_date,
+        }
+        return self.env.ref("gym_project.trainer_appointments_count_report_template").report_action(self, data=data)

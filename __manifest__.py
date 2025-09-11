@@ -13,7 +13,10 @@
         "views/gym_trainee_view.xml",
         "views/product_views.xml",
         "views/menu.xml",
-        "views/wizard_views.xml",
+        'reports/trainer_report.xml',
+        'views/gym_trainer_view.xml',
+        'views/wizard_views.xml',
+       
     ],
     "application": True,
     "installable": True,
