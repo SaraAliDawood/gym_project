@@ -16,12 +16,13 @@ class GymProjectTrainer(models.Model):
     session_cost = fields.Float(
        string="Session Cost"
     )
+    # دول هيتعرضو من حسبة النسبة الي في مودل البروداكت مضروبة في سعر الخدمة 
     trainer_cost_inside = fields.Float(
        string="Trainer Cost Out Working Hours"
     )
     trainer_cost_outside = fields.Float(
        string="Trainer Cost Within Working Hours"
-    )
+    ) 
     appointment_ids = fields.One2many(
         "gym.appointment",
         "trainer_id",

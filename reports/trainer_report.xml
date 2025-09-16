@@ -3,7 +3,8 @@
     <record id="trainer_appointments_count_report" model="ir.actions.report">
         <field name="name">Trainer Appointments Count</field>
         <field name="model">trainer.report.wizard</field>
-        <field name="report_type">qweb-pdf</field>
+        <!-- <field name="report_type">qweb-pdf</field> -->
+        <field name="report_type">qweb-html</field>
         <field name="report_name">gym_project.trainer_appointments_count_report_template</field>
         <field name="report_file">gym_project.trainer_appointments_count_report_template</field>
         <field name="print_report_name">'Trainer_Appointments_Count'</field>

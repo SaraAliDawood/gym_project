@@ -25,22 +25,51 @@ class GymAppointment(models.Model):
         string="Trainer",   
     )
    
-    trainer_cost_inside = fields.Float(
-       string="Trainer Cost Out Working Hours",
-       related="trainer_id.trainer_cost_inside"
-    )
-    trainer_cost_outside = fields.Float(
-       string="Trainer Cost Within Working Hours",
-       related="trainer_id.trainer_cost_outside"
-    )
-    session_cost = fields.Float(
-       string="Session Cost",
-       related="trainer_id.session_cost"
-    )
+    # trainer_cost_inside = fields.Float(
+    #    string="Trainer Cost Out Working Hours",
+    #    related="trainer_id.trainer_cost_inside"
+    # )
+    # trainer_cost_outside = fields.Float(
+    #    string="Trainer Cost Within Working Hours",
+    #    related="trainer_id.trainer_cost_outside"
+    # )
+    # session_cost = fields.Float(
+    #    string="Session Cost",
+    #    related="trainer_id.session_cost"
+    # )
     subscription_id = fields.Many2one(
     "gym.subscription",
     string="Subscription"
 )
+    is_in_working_hours = fields.Boolean(
+        string="Inside Working Hours",
+        compute="_compute_working_hours",
+        store=True
+    )
+
+    is_out_working_hours = fields.Boolean(
+        string="Outside Working Hours",
+        compute="_compute_working_hours",
+        store=True
+    )
+
+    trainer_cost_inside = fields.Float(
+        string="Trainer Cost Inside Working Hours",
+        compute="_compute_trainer_costs",
+        store=True
+    )
+    trainer_cost_outside = fields.Float(
+        string="Trainer Cost Outside Working Hours",
+        compute="_compute_trainer_costs",
+        store=True
+    )
+
+  
+    session_cost = fields.Float(
+        string="Session Cost",
+        compute="_compute_trainer_costs",
+        store=True
+    )
 
     # name = fields.Char(
     #     string="Appointment",
@@ -81,7 +110,36 @@ class GymAppointment(models.Model):
         for rec in self:
             if rec.end_time <= rec.start_time:
                 raise ValidationError("End Time must be greater than Start Time.")
+            
     # @api.depends("weekday", "start_time", "end_time")
     # def _compute_name(self):
     #     for rec in self:
     #         rec.name = f"{rec.weekday} ({rec.start_time} - {rec.end_time})" if rec.weekday else ""
+
+    @api.depends("start_time", "end_time")
+    def _compute_working_hours(self):
+        for rec in self:
+            if rec.start_time and rec.end_time:
+                start_hour = rec.start_time.hour
+                end_hour = rec.end_time.hour
+                rec.is_in_working_hours = (12 <= start_hour and end_hour <= 19)
+            else:
+                rec.is_in_working_hours = False
+           
+            rec.is_out_working_hours = not rec.is_in_working_hours
+
+    @api.depends("subscription_id.service_id", "is_in_working_hours")
+    def _compute_trainer_costs(self):
+        for rec in self:
+            service = rec.subscription_id.service_id
+            price = service.list_price if service else 0.0
+
+          
+            rec.trainer_cost_inside = price * ((service.trainer_percentage_inside or 0.0) / 100.0) if service else 0.0
+            rec.trainer_cost_outside = price * ((service.trainer_percentage_outside or 0.0) / 100.0) if service else 0.0
+
+            
+            if rec.is_in_working_hours:
+                rec.session_cost = rec.trainer_cost_inside
+            else:
+                rec.session_cost = rec.trainer_cost_outside        

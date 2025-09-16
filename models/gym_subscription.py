@@ -77,7 +77,7 @@ class GymSubscription(models.Model):
     # Service info
     # -------------------------
     service_id = fields.Many2one(
-        "product.product", 
+        "product.template", 
         string="Service", 
         required=True,
         domain=[("detailed_type", "=", "service"),("is_subscription", "=", True)]
