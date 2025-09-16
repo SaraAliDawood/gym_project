@@ -46,8 +46,7 @@
                         <field name="weekday" readonly="1"/>
                         <field name="start_time" readonly="1"/>
                         <field name="end_time" readonly="1"/>
-                         <field name="is_in_working_hours" readonly="1"/>
-                        <field name="is_out_working_hours" readonly="1"/>
+                      
                         <!-- <field name="subscription_id" readonly="1"/> -->
                     </group>
                     <group>

@@ -119,15 +119,23 @@ class GymAppointment(models.Model):
     @api.depends("start_time", "end_time")
     def _compute_working_hours(self):
         for rec in self:
-            if rec.start_time and rec.end_time:
-                start_hour = rec.start_time.hour
-                end_hour = rec.end_time.hour
-                rec.is_in_working_hours = (12 <= start_hour and end_hour <= 19)
+          if rec.start_time and rec.end_time:
+            # ✅ حول الوقت لـ local timezone
+            start_local = fields.Datetime.context_timestamp(self, rec.start_time)
+            end_local = fields.Datetime.context_timestamp(self, rec.end_time)
+
+            start_hour = start_local.hour
+            end_hour = end_local.hour
+
+            if start_hour >= 12 and end_hour <= 19:
+                rec.is_in_working_hours = True
+                rec.is_out_working_hours = False
             else:
                 rec.is_in_working_hours = False
-           
-            rec.is_out_working_hours = not rec.is_in_working_hours
-
+                rec.is_out_working_hours = True
+          else:
+            rec.is_in_working_hours = False
+            rec.is_out_working_hours = False 
     @api.depends("subscription_id.service_id", "is_in_working_hours")
     def _compute_trainer_costs(self):
         for rec in self:

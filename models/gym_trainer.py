@@ -13,16 +13,8 @@ class GymProjectTrainer(models.Model):
     image_500 = fields.Image("Photo", max_width=500, max_height=500)
 
     is_active = fields.Boolean("Is Active?", default=True)
-    session_cost = fields.Float(
-       string="Session Cost"
-    )
-    # دول هيتعرضو من حسبة النسبة الي في مودل البروداكت مضروبة في سعر الخدمة 
-    trainer_cost_inside = fields.Float(
-       string="Trainer Cost Out Working Hours"
-    )
-    trainer_cost_outside = fields.Float(
-       string="Trainer Cost Within Working Hours"
-    ) 
+
+  
     appointment_ids = fields.One2many(
         "gym.appointment",
         "trainer_id",
