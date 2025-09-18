@@ -22,4 +22,15 @@
               name="Trainees"
               parent="menu_gym_root"
               action="action_gym_trainee"/>
+
+    <record id="action_youtube" model="ir.actions.client">
+    <field name="name">Youtube Test</field>
+    <field name="tag">gym_project.youtube_action</field>
+</record>
+
+<menuitem id="menu_youtube"
+          name="Youtube"
+          parent="menu_gym_root"
+          action="action_youtube"/>
+          
 </odoo>

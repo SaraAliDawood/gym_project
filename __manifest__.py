@@ -4,7 +4,7 @@
     "sequence": 1,
     "summary": "Gym Appointments & Subscriptions",
     "author": "sara dawood",
-    "depends": ["base", "product"],
+    "depends": ["base", "product", "web"],
     "data": [
         "security/ir.model.access.csv",
         "views/gym_appointment_view.xml",
@@ -18,6 +18,13 @@
         'views/wizard_views.xml',
        
     ],
+    'assets': {
+    'web.assets_backend': [
+        'gym_project/static/src/js/youtube.js',
+        'gym_project/static/src/xml/youtube.xml',
+    ],
+},
+
     "application": True,
     "installable": True,
     "license": "LGPL-3",

@@ -41,9 +41,9 @@
                             <field name="national_id"/>
                             <field name="is_active"/>
                             <field name="number_of_appointments"/>
-                            <field name="trainer_cost_inside"/>
+                            <!-- <field name="trainer_cost_inside"/>
                             <field name="trainer_cost_outside"/>
-                            <field name="session_cost"/>
+                            <field name="session_cost"/> -->
                         </group>
                         <group>
                             <field name="image_500" widget="image" class="oe_avatar"/>
