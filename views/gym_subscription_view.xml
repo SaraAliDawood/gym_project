@@ -6,8 +6,6 @@
         <field name="model">gym.subscription</field>
         <field name="arch" type="xml">
             <tree>
-                <!-- <field name="trainer_name"/>
-                <field name="trainee_name"/> -->
                 <field name="service_id"/>
                 <field name="price"/>
                 <field name="state"/>
@@ -28,30 +26,25 @@
                     </header>
 
                     <group>
-                        <!-- Left: Trainer Info -->
                         <group string="Trainer Info" colspan="2">
                             <field name="trainer_id"/>
-                            <!-- <field name="trainer_name" readonly="1"/> -->
                             <field name="trainer_national_id" readonly="1"/>
                             <field name="trainer_phone" readonly="1"/>
                         </group>
 
-                        <!-- Right: Trainee Info -->
                         <group string="Trainee Info" colspan="2">
                             <field name="trainee_id"/>
-                            <!-- <field name="trainee_name" readonly="1"/> -->
                             <field name="trainee_national_id" readonly="1"/>
                             <field name="trainee_phone" readonly="1"/>
                             <field name="service_id"/>
                             <field name="price" readonly="1"/>
-                           <field name="appointment_ids" domain="[('trainer_id', '=', trainer_id)]">
-    <tree editable="bottom">
-        <field name="weekday"/>
-        <field name="start_time" />
-        <field name="end_time" />
-    </tree>
-</field>
-
+                            <field name="appointment_ids" domain="[('trainer_id', '=', trainer_id)]">
+                                <tree editable="bottom">
+                                    <field name="weekday"/>
+                                    <field name="start_time"/>
+                                    <field name="end_time"/>
+                                </tree>
+                            </field>
                         </group>
                     </group>
                 </sheet>
@@ -65,5 +58,4 @@
         <field name="res_model">gym.subscription</field>
         <field name="view_mode">tree,form</field>
     </record>
-
 </odoo>

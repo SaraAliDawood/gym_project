@@ -8,15 +8,11 @@ class GymSubscription(models.Model):
 
     # -------------------------
     # Trainer info
-
     # -------------------------
-
     trainer_id = fields.Many2one(
-        "gym.trainer", 
-        string="Trainer", 
-       
+        "gym.trainer",
+        string="Trainer"
     )
-
 
     trainer_national_id = fields.Char(
         string="Trainer National ID",
@@ -35,11 +31,10 @@ class GymSubscription(models.Model):
     # Trainee info
     # -------------------------
     trainee_id = fields.Many2one(
-        "gym.trainee",   
+        "gym.trainee",
         string="Trainee",
         required=True
     )
-
 
     trainee_national_id = fields.Char(
         string="Trainee National ID",
@@ -53,39 +48,27 @@ class GymSubscription(models.Model):
         store=True,
         readonly=True
     )
-    
+
     # -------------------------
     # Trainer appointments
     # -------------------------
     appointment_ids = fields.One2many(
-           "gym.appointment",
-           "subscription_id",   
-            string="Appointments"
-
-)
-
-    # appointment_ids = fields.Many2many(
-    #       "gym.appointment",
-    #       "subscription_appointment_rel", 
-    #       "subscription_id",               
-    #       "appointment_id",                
-    #       string="Appointments"
-    #   )
-
-
-    # -------------------------
-    # Service info
-    # -------------------------
-    service_id = fields.Many2one(
-        "product.template", 
-        string="Service", 
-        required=True,
-        domain=[("detailed_type", "=", "service"),("is_subscription", "=", True)]
+        "gym.appointment",
+        "subscription_id",
+        string="Appointments"
     )
+
+    service_id = fields.Many2one(
+        "product.template",
+        string="Service",
+        required=True,
+        domain=[("detailed_type", "=", "service"), ("is_subscription", "=", True)]
+    )
+
     price = fields.Float(
-        string="Price", 
-        related="service_id.list_price", 
-        store=True, 
+        string="Price",
+        related="service_id.list_price",
+        store=True,
         readonly=True
     )
 
@@ -101,11 +84,9 @@ class GymSubscription(models.Model):
         default="draft"
     )
 
-   
-   
-   
-   
-    # State actions
+    # -------------------------
+    # Actions
+    # -------------------------
     def action_draft(self):
         self.state = "draft"
 
@@ -120,3 +101,11 @@ class GymSubscription(models.Model):
 
     def action_done(self):
         self.state = "done"
+
+    # -------------------------
+    # Print All Subscriptions
+    # -------------------------
+    # def print_all_subscriptions(self):
+    #     """Generate a PDF report for all subscriptions."""
+    #     all_subs = self.env["gym.subscription"].search([])
+    #     return self.env.ref("gym_project.action_gym_subscription_all").report_action(all_subs)

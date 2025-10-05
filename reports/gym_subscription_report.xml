@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Report Template -->
+    <template id="report_gym_subscription_all">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2 style="text-align:center;">All Gym Subscriptions</h2>
+                    <table class="table table-sm table-bordered" style="width:100%;">
+                        <thead>
+                            <tr style="background-color:#eee;">
+                                <th>Trainer</th>
+                                <th>Trainee</th>
+                                <th>Service</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="docs" t-as="sub">
+                                <tr>
+                                    <td><t t-esc="sub.trainer_id.name or ''"/></td>
+                                    <td><t t-esc="sub.trainee_id.name or ''"/></td>
+                                    <td><t t-esc="sub.service_id.name or ''"/></td>
+                                    <td><t t-esc="sub.price"/></td>
+                                    <td><t t-esc="sub.state"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <!-- Report Action -->
+  <record id="action_gym_subscription_all" model="ir.actions.report">
+    <field name="name">All Gym Subscriptions</field>
+    <field name="model">gym.subscription</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">gym_project.report_gym_subscription_all</field>
+    <field name="report_file">gym_project.report_gym_subscription_all</field>
+    <field name="print_report_name">'All_Gym_Subscriptions_Report'</field>
+    <field name="binding_model_id" ref="model_gym_subscription"/>
+    <field name="binding_type">report</field>
+</record>
+
+
+    <!-- Server Action that appears in Tree View -->
+    <record id="action_print_all_subscriptions" model="ir.actions.server">
+        <field name="name">Print All Subscriptions</field>
+        <field name="model_id" ref="model_gym_subscription"/>
+        <field name="binding_model_id" ref="model_gym_subscription"/>
+        <field name="binding_type">action</field>
+        <field name="state">code</field>
+        <field name="code">
+action = env.ref('gym_project.action_gym_subscription_all').report_action(env['gym.subscription'].search([]))
+        </field>
+    </record>
+</odoo>
